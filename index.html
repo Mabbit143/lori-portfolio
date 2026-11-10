@@ -1,0 +1,360 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Lori James — Research, Grants &amp; AI-Built Tools</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400&display=swap"
+    />
+    <link rel="stylesheet" href="hark.css" />
+    <link rel="stylesheet" href="hark-hero.css" />
+    <style>
+      /* Lori's University of Oregon palette: UO green, UO yellow, chocolate, cream, teal
+         (an explicit departure from the default palette). */
+      :root {
+        --x-green: #154733;
+        --x-yellow: #fee123;
+        --x-yellow-edge: #e3c400;
+        --x-cream: #fbf7f2;
+        --x-heading: light-dark(#154733, #f6ea9c);
+        /* Teal deepened so link text clears 4.5:1 on cream and on the tinted cards. */
+        --x-teal: #128c8a;
+        --x-teal-deep: light-dark(#0d6e6c, #7fd3cf);
+        --text-primary: light-dark(#4a2e1f, #f4ebe2);
+        --text-secondary: light-dark(#6b4f3e, #cdb8a6);
+        --text-tertiary: light-dark(#4a2e1f4d, #f4ebe24d);
+        --text-primary-on: light-dark(#fbf7f2, #154733);
+        --text-secondary-on: light-dark(#c9dccf, #2f5c48);
+        --fill-primary: light-dark(#154733, #dfeadf);
+        --fill-primary-on: light-dark(#fbf7f2, #1e1610);
+        --fill-secondary: light-dark(#4a2e1f80, #f4ebe280);
+        --fill-tertiary: light-dark(#ebf1e7, #1f3128);
+        --fill-segment: light-dark(#154733, #dfeadf);
+        --transparent-primary: light-dark(#4a2e1f4d, #f4ebe24d);
+        --stroke-primary: light-dark(#4a2e1f26, #f4ebe226);
+        --stroke-secondary: light-dark(#4a2e1f14, #f4ebe214);
+        --stroke-primary-on: light-dark(#fbf7f22a, #1e16101a);
+        --stroke-composer: light-dark(#fbf7f2b3, #1e161080);
+        --hover-wash: light-dark(#15473312, #fee12314);
+        --mat-regular: light-dark(rgb(251 247 242 / 0.6), rgb(30 22 16 / 0.55));
+        --mat-thin: light-dark(rgb(251 247 242 / 0.25), rgb(30 22 16 / 0.4));
+        --mat-agent: light-dark(rgb(251 247 242 / 0.88), rgb(30 22 16 / 0.7));
+        --hark-shadow: 0 8px 40px rgb(21 71 51 / 0.12);
+
+        /* A bright hero: a pale green-tinted cream wash over the photo, UO green type. */
+        --hero-surface: #eef3ea;
+        --hero-text: #154733;
+        --hero-text-muted: #4a2e1fe6;
+        --hero-scrim-strong: rgb(242 246 238 / 0.92);
+        --hero-scrim-soft: rgb(236 243 234 / 0.6);
+        --hero-scrim-side: rgb(228 238 228 / 0.66);
+        --hero-glass: rgb(251 247 242 / 0.78);
+        --hero-glass-faint: rgb(251 247 242 / 0.62);
+        --hero-glass-stroke: rgb(21 71 51 / 0.22);
+      }
+      h1, h2, h3 { color: var(--x-heading); }
+      .hero h1 { color: #154733; }
+      .hero__img { filter: brightness(1.15) saturate(0.9); }
+      .hero .hero__eyebrow { color: #154733; }
+      .hero .hero__sub { color: #4a2e1f; }
+
+      /* UO yellow for buttons and small markers, with UO green text on it. */
+      .btn {
+        background: var(--x-yellow);
+        border-color: var(--x-yellow-edge);
+        color: var(--x-green);
+        font-weight: var(--weight-medium);
+      }
+      .btn:hover { box-shadow: inset 0 0 0 100px rgb(21 71 51 / 0.08); }
+      .btn[target="_blank"]::after { color: var(--x-green); }
+      .btn[data-hark-action] { background: var(--x-yellow); color: var(--x-green); }
+      .link {
+        color: var(--x-teal-deep);
+        text-decoration-color: var(--x-teal);
+      }
+      .head__eyebrow {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: var(--x-heading);
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        font-size: var(--size-caption);
+      }
+      .head__eyebrow::before {
+        content: "";
+        width: 22px;
+        height: 4px;
+        border-radius: 2px;
+        background: var(--x-yellow);
+        box-shadow: inset 0 0 0 1px var(--x-yellow-edge);
+      }
+      .pill { color: var(--x-teal-deep); }
+      .step__num { color: var(--x-heading); }
+      .cards .quote {
+        padding-left: 12px;
+        border-left: 3px solid var(--x-yellow);
+      }
+
+      /* Footer on UO green. */
+      .foot {
+        padding: 24px;
+        border-top: 0;
+        border-radius: var(--r-l);
+        background: var(--x-green);
+        color: var(--x-cream);
+      }
+      .foot nav a { background: #2b5a46; color: var(--x-cream); }
+      .foot nav a:hover { box-shadow: none; background: #3a6a55; }
+      .foot :focus-visible { outline-color: var(--x-yellow); }
+      .foot .badge { background: var(--x-yellow); color: var(--x-green); }
+
+      /* The About badge: yellow on UO green, text only. */
+      .x-uo {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        margin: 0 0 16px;
+        padding: 6px 12px;
+        border-radius: var(--r-pill);
+        background: var(--x-green);
+        color: var(--x-yellow);
+        font: var(--type-tag);
+      }
+      .x-uo::before {
+        content: "";
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: var(--x-yellow);
+      }
+
+      .x-about {
+        display: flex;
+        gap: 24px;
+        align-items: flex-start;
+      }
+      .x-mascot {
+        flex: 0 0 auto;
+        width: 220px;
+        margin: 0;
+      }
+      .x-mascot img {
+        display: block;
+        width: 100%;
+        height: auto;
+        border-radius: var(--r-m);
+        border: 2px solid var(--x-green);
+        background: var(--fill-tertiary);
+      }
+      .x-mascot figcaption {
+        font: var(--type-caption);
+        color: var(--text-secondary);
+        margin-top: 8px;
+      }
+      .x-tools {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+      @media (max-width: 640px) {
+        .x-about {
+          flex-direction: column;
+        }
+        .x-mascot {
+          width: 170px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page" id="top">
+      <header class="nav glass" data-auto></header>
+      <main class="main">
+        <section class="hero">
+          <img class="hero__img" src="portfolio-hero.png" alt="A researcher's desk at night, lamp on, notes and laptop open" />
+          <div class="hero__copy">
+            <p class="hero__eyebrow">Freelance · Eugene, Oregon · Remote</p>
+            <h1>Lori James — Research, Grants &amp; AI-Built Tools</h1>
+            <p class="hero__sub">Source-verified research, grant and nonprofit support, and AI-assisted tools. The version that survives an audit.</p>
+            <p class="hero__meta">For nonprofit leaders, small orgs, academics and Upwork clients</p>
+          </div>
+          <aside class="callout" aria-label="Next step">
+            <p class="callout__head"><span class="hark-mark" data-size="16"></span> Next step</p>
+            <p class="callout__lead"><strong>Got a research job that needs receipts?</strong> Hire me on Upwork, or just email.</p>
+            <div class="links">
+              <a class="btn" href="https://www.upwork.com/freelancers/" target="_blank" rel="noopener">Hire me on Upwork</a>
+              <a class="btn" href="mailto:mabbit286@gmail.com">Email me</a>
+            </div>
+          </aside>
+        </section>
+
+        <section class="section" id="about" data-nav="About">
+          <div class="head">
+            <p class="head__eyebrow">About</p>
+            <h2>A researcher who reads the footnotes, then checks them.</h2>
+          </div>
+          <div class="x-about">
+            <figure class="x-mascot">
+              <img src="mabbit-at-computer.png" alt="Mabbit, Lori's mascot: a purple-haired, tattooed rabbit working at a laptop" />
+              <figcaption>Mabbit, my mascot, at work</figcaption>
+            </figure>
+            <div class="prose">
+              <p class="x-uo">University of Oregon Duck · Class of 2027</p>
+              <p>I'm a freelance researcher based in Eugene, Oregon, working remotely, and self-employed since Sep 2025.</p>
+              <p>I study Archaeological Anthropology at the University of Oregon (B.A. expected 2027), and hold associate degrees in Environmental Studies and General Studies from Portland Community College (2025).</p>
+              <p>I founded Deconstructing Academia, and Handshake AI Skills Studio named me a Top Builder in November 2026.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="section" id="services" data-nav="Services">
+          <div class="head">
+            <p class="head__eyebrow">Services</p>
+            <h2>Five things I do well, and do properly.</h2>
+          </div>
+          <div class="cards">
+            <div>
+              <h3>Public records &amp; registry research</h3>
+              <p>Official government registries and recorded records: Secretary of State filings, county recorder and clerk, permits.</p>
+              <ul>
+                <li>Per-field citations</li>
+                <li>Unresolvable rows flagged</li>
+                <li>Never scraped or aggregator data</li>
+              </ul>
+            </div>
+            <div>
+              <h3>Grant &amp; nonprofit research</h3>
+              <ul>
+                <li>Prospect and funder research</li>
+                <li>Federal audit (FAC) lookups</li>
+                <li>Policy research</li>
+                <li>Research briefs and source lists</li>
+              </ul>
+            </div>
+            <div>
+              <h3>Website &amp; usability review</h3>
+              <p class="quote">Can a stressed user find help, eligibility and the next step?</p>
+              <p>One-page audits with concrete fixes.</p>
+            </div>
+            <div>
+              <h3>AI-assisted tools &amp; automation</h3>
+              <p>Product requirements, user flows, prototyping and testing with AI coding tools.</p>
+              <p class="fineprint">Next.js, React, TypeScript, Supabase, Python, Playwright; Notion, Gemini, NotebookLM, Floot.</p>
+            </div>
+            <div>
+              <h3>Content &amp; visual production</h3>
+              <p>Research turned into accessible public writing, Canva graphics and short-form video.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="section" id="process" data-nav="Process">
+          <div class="head">
+            <p class="head__eyebrow">How I work</p>
+            <h2>Four steps, no mystery invoices.</h2>
+          </div>
+          <div class="steps">
+            <article class="step">
+              <div class="step__intro"><p class="step__num">01</p><p class="step__eyebrow">Scope</p></div>
+              <div><h3>Scope a bounded deliverable</h3><p>A fixed price or milestones, agreed up front.</p></div>
+            </article>
+            <article class="step">
+              <div class="step__intro"><p class="step__num">02</p><p class="step__eyebrow">Source</p></div>
+              <div><h3>Go to primary sources first</h3><p>The original record, not someone's summary of it.</p></div>
+            </article>
+            <article class="step">
+              <div class="step__intro"><p class="step__num">03</p><p class="step__eyebrow">Cite</p></div>
+              <div><h3>Cite every field and document gaps</h3><p>If it can't be traced, you'll know.</p></div>
+            </article>
+            <article class="step">
+              <div class="step__intro"><p class="step__num">04</p><p class="step__eyebrow">Deliver</p></div>
+              <div><h3>Deliver a clean spreadsheet or brief</h3><p>With a QA note on what couldn't be verified.</p></div>
+            </article>
+          </div>
+        </section>
+
+        <section class="section" id="work" data-nav="Work">
+          <div class="head">
+            <p class="head__eyebrow">Selected work</p>
+            <h2>Things I've built, audited and published.</h2>
+          </div>
+          <div class="cards">
+            <div>
+              <h3>PageMark</h3>
+              <p>A handwriting-to-Markdown tool: photos of notes become structured headings, to-dos and tables for Obsidian and Notion.</p>
+              <p><a class="link" href="https://notes.deconstructingacademia.com" target="_blank" rel="noopener">notes.deconstructingacademia.com</a></p>
+            </div>
+            <div>
+              <h3>DA Syllabus Auditor &amp; Blindspot Engine</h3>
+              <p>Reviews syllabi against published university policies and grounds every finding in exact quotes, with Investigator/Skeptic review.</p>
+              <p><span class="pill">Meta Global AI Developer Hackathon, Nov 2026</span></p>
+            </div>
+            <div>
+              <h3>DA Resource Central</h3>
+              <p>A free academic resource hub.</p>
+              <p><a class="link" href="https://da-resource-central.vercel.app" target="_blank" rel="noopener">da-resource-central.vercel.app</a></p>
+            </div>
+            <div>
+              <h3>University of Oregon Basic Needs website review</h3>
+              <p>A usability audit sample with concrete recommendations.</p>
+            </div>
+            <div>
+              <h3>Deconstructing Academia</h3>
+              <p>Founder, writer and publisher: website, newsletter, digital products and Instagram content translating research for students.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="section" id="tools" data-nav="Tools">
+          <div class="head">
+            <p class="head__eyebrow">Tools &amp; skills</p>
+            <h2>The kit behind the work.</h2>
+          </div>
+          <ul class="x-tools">
+            <li class="pill">Source verification</li>
+            <li class="pill">Public records research</li>
+            <li class="pill">Research briefs</li>
+            <li class="pill">Website usability review</li>
+            <li class="pill">Product requirements</li>
+            <li class="pill">AI-assisted prototyping</li>
+            <li class="pill">Workflow testing</li>
+            <li class="pill">Notion</li>
+            <li class="pill">Canva</li>
+            <li class="pill">ArcGIS Pro (GIS)</li>
+            <li class="pill">Microsoft Word</li>
+          </ul>
+        </section>
+
+        <section class="section" id="contact" data-nav="Contact">
+          <div class="head">
+            <p class="head__eyebrow">Contact</p>
+            <h2>Say hi. I answer email.</h2>
+            <p class="head__sub">Find me on Upwork as Lori James, or reach out directly.</p>
+          </div>
+          <div class="links">
+            <a class="btn" href="https://www.upwork.com/freelancers/" target="_blank" rel="noopener">Find me on Upwork as Lori James</a>
+            <a class="btn" href="https://www.linkedin.com/in/mabbit143/" target="_blank" rel="noopener">LinkedIn</a>
+            <a class="btn" href="mailto:mabbit286@gmail.com">mabbit286@gmail.com</a>
+            <a class="btn" href="https://buymeacoffee.com/mabbit143" target="_blank" rel="noopener">Support my free resources</a>
+          </div>
+        </section>
+      </main>
+      <footer class="foot">
+        <p>Lori James · Freelance researcher · Eugene, Oregon</p>
+        <nav aria-label="Back to sections" data-auto></nav>
+        <a class="badge" href="https://hark.com/" target="_blank" rel="noopener"
+          ><span class="hark-mark"></span><span>built by hark</span></a
+        >
+      </footer>
+    </div>
+    <script src="hark.js"></script>
+  </body>
+</html>
